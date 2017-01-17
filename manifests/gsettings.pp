@@ -9,8 +9,9 @@ define gnome::gsettings(
   $value  = undef,
 ) {
   exec { "gsettings: change-${schema}-${key} to ${value} for user ${user}":
-    user    => $user,
-    command => "/usr/bin/gsettings set ${schema} ${key} \"${value}\"",
-    unless  => "/usr/bin/gsettings get ${schema} ${key} | grep -qF \"${value}\" ",
+    user     => $user,
+    command  => "/usr/bin/gsettings set ${schema} ${key} \"${value}\"",
+    unless   => "/usr/bin/gsettings get ${schema} ${key} | grep -qF \"${value}\" ",
+    loglevel => 'info',
   }
 }
